@@ -54,6 +54,7 @@ input {
     background-color: #dcdcdc; }
 
 #result {
+  user-select: none;
   margin: 0;
   text-align: center;
   font-size: 0;

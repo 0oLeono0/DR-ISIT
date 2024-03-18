@@ -44,10 +44,13 @@ function displayClues(password) {
 }
 
 function checkPassword() {
-    const inputPassword = document.getElementById('pin1').value +
-                          document.getElementById('pin2').value +
-                          document.getElementById('pin3').value +
-                          document.getElementById('pin4').value;
+    const inputs = [
+        document.getElementById('pin1'),
+        document.getElementById('pin2'),
+        document.getElementById('pin3'),
+        document.getElementById('pin4')
+    ];
+    const inputPassword = inputs.map(input => input.value).join('');
 
     let resultElement = document.getElementById('result');
     let owerflowElement = document.getElementById('owerflow');
@@ -55,15 +58,22 @@ function checkPassword() {
     if (inputPassword === currentPassword) {
         resultElement.innerText = 'Молодец, пароль верен!';
         resultElement.className = 'correct';
+        inputs.forEach(input => input.style.backgroundColor = ''); // Сброс цвета фона
         currentPassword = generatePassword();
         displayClues(currentPassword);
-        document.getElementById('pin1').value = '';
-        document.getElementById('pin2').value = '';
-        document.getElementById('pin3').value = '';
-        document.getElementById('pin4').value = '';
+        inputs.forEach(input => input.value = ''); // Сброс значений
     } else {
         resultElement.innerText = 'Пароль не верен, попробуйте еще раз';
         resultElement.className = '';
+
+        // Установка фона инпута в красный, если цифра неправильная
+        inputs.forEach((input, index) => {
+            if (input.value !== currentPassword[index]) {
+                input.style.backgroundColor = '#ff6161';
+            } else {
+                input.style.backgroundColor = ''; // Сброс цвета фона, если цифра правильная
+            }
+        });
     }
 
     owerflowElement.className = 'active';
@@ -72,6 +82,7 @@ function checkPassword() {
         owerflowElement.className = '';
     }, 2000);
 }
+
 
 
 
