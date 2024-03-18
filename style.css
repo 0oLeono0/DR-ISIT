@@ -45,8 +45,8 @@ input {
   background-color: #c9c9c9;
   transition: background-color 0.3s;
   text-align: center;
-  width: 7vw;
-  height: 10vw; }
+  width: 8vw;
+  height: 11vw; }
   input:not(:last-child) {
     margin-right: 1vw; }
   input:hover, input:active, input:focus {
